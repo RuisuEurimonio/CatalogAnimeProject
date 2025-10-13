@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Anime App{% endblock %}</title>
+
+    <link rel="icon" href="{% static 'animepage/anime.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'animepage/css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'animepage/css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'animepage/css/info.css' %}">
+    <link rel="stylesheet" href="{% static 'animepage/css/character.css' %}">
+    <link rel="stylesheet" href="{% static 'animepage/css/edit.css' %}">
+    <link rel="stylesheet" href="{% static 'animepage/css/createAnime.css' %}">
+    <link rel="stylesheet" href="{% static 'animepage/css/createCharacter.css' %}">
+    <link rel="stylesheet" href="{% static 'animepage/css/delete.css' %}">
+</head>
+<body>
+
+    <nav>
+        <a href="{% url 'anime:index' %}">Inicio</a>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+{% extends "animepage/base.html" %}
+
+{% block title %} {{character.anime.name}} - {{character.name}} {% endblock %}
+
+{% block content %}
+
+<div class="character-container">
+    <div class="character-card">
+      {% if character.img_url != "no_image" %}
+        <img src="{{ character.img_url }}" alt="{{ character.name }}" class="character-img">
+      {% else %}
+        <div class="no-image">Sin imagen disponible</div>
+      {% endif %}
+
+      <div class="character-info">
+        <h1>{{ character.name }}</h1>
+        <p><strong>Edad:</strong> {{ character.age }}</p>
+        <p><strong>Descripción:</strong></p>
+        <p class="description">{{ character.description }}</p>
+        <p><strong>Anime:</strong> {{ character.anime.name }}</p>
+
+        <div class="buttons">
+          <a href="{% url 'anime:info' character.anime.id %}" class="btn">Volver al anime</a>
+          <a href="{% url 'anime:infoCharacters' character.anime.id character.id %}" class="btn edit">Editar información</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}

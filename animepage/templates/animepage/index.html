@@ -1,0 +1,55 @@
+{% extends "animepage/base.html" %}
+
+{% block title %}Inicio - Anime App{% endblock %}
+
+{% block content %}
+<section>
+
+    <div class="main"> 
+        <h1>Bienvenido a la app de Anime</h1> 
+        <p>Explora animes, personajes y más.</p> 
+    </div>
+
+  <div class="section-header">
+    <h2>Últimos agregados.</h2>
+    <button><a href="{% url 'anime:create' %}">Agregar</a></button>
+  </div>
+
+  {% if anime_list %}
+  <div class="cards-container">
+    {% for anime in anime_list %}
+    <div class="card">
+      <a href="{% url 'anime:info' anime.id %}">
+        {% if anime.img_url != "no_image" %}
+          <img src="{{ anime.img_url }}" alt="{{ anime.name }}">
+        {% else %}
+          <div style="background:#333;width:100%;height:180px;display:flex;align-items:center;justify-content:center;">
+            <span style="color:#888;">Sin imagen</span>
+          </div>
+        {% endif %}
+
+        <div class="card-content">
+          <h3>{{ anime.name }}</h3>
+          <p><strong>Fecha:</strong> {{ anime.date }}</p>
+          <p><strong>Género principal:</strong> {{ anime.get_main_genre_display }}</p>
+          <p><strong>Tipo:</strong> {{ anime.get_type_display }}</p>
+          <p class="description">{{ anime.description|truncatechars:100 }}</p>
+
+          {% if anime.status == "FIN" %}
+            <span class="status finalizado">{{ anime.get_status_display }}</span>
+          {% elif anime.status == "EM" %}
+            <span class="status emision">{{ anime.get_status_display }}</span>
+          {% elif anime.status == "PROX" %}
+            <span class="status proximamente">{{ anime.get_status_display }}</span>
+          {% endif %}
+          <a href="{% url 'anime:deleteAnime' anime.id %}" class="btn-delete btn-index">Eliminar Anime</a>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+    <p class="no-anime">No hay animes disponibles</p>
+  {% endif %}
+</section>
+{% endblock %}

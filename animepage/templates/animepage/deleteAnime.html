@@ -1,0 +1,17 @@
+{% extends "animepage/base.html" %}
+{% block title %}Eliminar Anime{% endblock %}
+
+{% block content %}
+<div class="delete-confirm-container">
+  <div class="delete-confirm-card">
+    <h2>¿Eliminar anime "{{ anime.name }}"?</h2>
+    <p>Esta acción eliminará también todos sus personajes asociados.</p>
+
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn-delete">Sí, eliminar</button>
+      <a href="{% url 'anime:info' anime.id %}" class="btn-cancel">Cancelar</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

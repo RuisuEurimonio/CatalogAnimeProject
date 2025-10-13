@@ -1,0 +1,56 @@
+{% extends "animepage/base.html" %}
+
+{% block title %} Crear anime {% endblock %}
+
+{% block content %}
+
+ <div class="create-container">
+    <div class="create-card">
+      <h1>Agregar nuevo Anime</h1>
+
+      <form method="post" class="create-form">
+        {% csrf_token %}
+
+        <label for="name">Nombre del Anime:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="date">Fecha de Estreno:</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="main_genre">Género Principal:</label>
+        <select id="main_genre" name="main_genre" required>
+          <option value="ACC">Acción</option>
+          <option value="COM">Comedia</option>
+          <option value="DRM">Drama</option>
+          <option value="FAN">Fantasía</option>
+        </select>
+
+        <label for="type">Tipo:</label>
+        <select id="type" name="type" required>
+          <option value="AN">Anime</option>
+          <option value="PE">Película</option>
+          <option value="OV">Ova</option>
+        </select>
+
+        <label for="status">Estado:</label>
+        <select id="status" name="status" required>
+          <option value="EM">En emisión</option>
+          <option value="PROX">Próximamente</option>
+          <option value="FIN">Finalizado</option>
+        </select>
+
+        <label for="img_url">URL de Imagen:</label>
+        <input type="url" id="img_url" name="img_url" placeholder="https://ejemplo.com/imagen.jpg" oninput="previewImage(this.value)">
+
+        <label for="description">Descripción:</label>
+        <textarea id="description" name="description" rows="5" placeholder="Describe brevemente el anime..." required></textarea>
+
+        <div class="form-buttons">
+          <input type="submit" value="Guardar Anime" class="btn save">
+          <a href="{% url 'anime:index' %}" class="btn back">Cancelar</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  {% endblock %}

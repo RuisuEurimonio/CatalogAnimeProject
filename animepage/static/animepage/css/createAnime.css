@@ -1,0 +1,114 @@
+.create-char-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 30px 15px;
+}
+
+.create-char-card {
+  background-color: #1f2833;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
+  padding: 35px 40px;
+  width: 100%;
+  max-width: 900px;
+  box-sizing: border-box;
+  display: flex;
+  gap: 40px;
+}
+
+/* MITAD IZQUIERDA: Información del anime */
+.create-char-anime {
+  flex: 1;
+  text-align: center;
+  color: #c5c6c7;
+}
+
+.create-char-anime h2 {
+  color: #f548ec;
+  margin-bottom: 15px;
+}
+
+.create-char-anime img {
+  width: 100%;
+  max-width: 280px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+/* MITAD DERECHA: Formulario */
+.create-char-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.create-char-form label {
+  color: #c5c6c7;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.create-char-form input[type="text"],
+.create-char-form input[type="number"],
+.create-char-form input[type="url"],
+.create-char-form textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #f548ec;
+  background-color: #0b0c10;
+  color: #fff;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.create-char-form textarea {
+  resize: vertical;
+}
+
+.create-char-form input[type="submit"] {
+  background-color: #f548ec;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-weight: 600;
+}
+
+.create-char-form input[type="submit"]:hover {
+  background-color: #66fcf1;
+  color: #0b0c10;
+}
+
+.create-char-back {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.create-char-back a {
+  color: #c3073f;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.create-char-back a:hover {
+  color: #ff3366;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .create-char-card {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .create-char-anime img {
+    max-width: 220px;
+  }
+}

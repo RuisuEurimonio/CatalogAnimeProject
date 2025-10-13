@@ -1,0 +1,55 @@
+{% extends "animepage/base.html" %}
+
+{% block title %} {{info.name}} {% endblock %}
+
+{% block content %}
+
+<div class="anime-detail">
+  <div class="anime-header">
+    <img src="{{ info.img_url }}" alt="{{ info.name }}">
+    <div class="anime-info">
+      <h1>{{ info.name }}</h1>
+      <p><strong>Género:</strong> {{ info.get_main_genre_display }}</p>
+      <p><strong>Fecha:</strong> {{ info.date }}</p>
+      <p><strong>Tipo:</strong> {{ info.get_type_display }}</p>
+      <p><strong>Descripción:</strong> {{ info.description }}</p>
+      <span class="status 
+        {% if info.status == 'FIN' %}status-finalizado
+        {% elif info.status == 'EM' %}status-emision
+        {% elif info.status == 'PROX' %}status-proximamente
+        {% endif %}">
+        {{ info.get_status_display }}
+      </span>
+    </div>
+  </div>
+
+  <div class="character-list">
+    <h2>Personajes</h2>
+    <button class="btn-add-character"> <a class="btn-add-character-text" href="{% url 'anime:createCharacter' info.id%}">  Agregar nuevo personaje. </a> </button>
+    <ul>
+      {% if info.character_set.all %}
+  <div class="character-container-info">
+    {% for character in info.character_set.all %}
+        <div class="character-card-info">
+        <a href="{% url 'anime:character' info.id character.id %}">
+            {% if character.img_url != "no_image" %}
+            <img src="{{ character.img_url }}" alt="{{ character.name }}" />
+            {% else %}
+            <div class="no-character-img">
+                <span>Sin imagen</span>
+            </div>
+            {% endif %}
+            <p class="character-name-info">{{ character.name }}</p>
+            <a href="{% url 'anime:deleteCharacter' info.id character.id %}" class="btn-delete">Eliminar</a>
+        </a>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="no-characters">No hay personajes disponibles.</p>
+    {% endif %}
+    </ul>
+  </div>
+</div>
+
+{% endblock %}
