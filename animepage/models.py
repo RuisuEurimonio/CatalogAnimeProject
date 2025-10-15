@@ -20,16 +20,19 @@ class Anime(models.Model):
     name = models.CharField(max_length=300)
     date = models.DateField()
     main_genre = models.CharField(
+        max_length=10,
         choices=GenreChoices.choices,
         default=GenreChoices.ACCION
     )
     description = models.CharField(max_length=1000)
     img_url = models.CharField(max_length=2000, default="no_image")
     status = models.CharField(
+        max_length=12,
         choices=StatusChoices.choices,
         default=StatusChoices.FINALIZADO
     )
     type = models.CharField(
+        max_length=10,
         choices=TypeChoices.choices,
         default=TypeChoices.ANIME
     )

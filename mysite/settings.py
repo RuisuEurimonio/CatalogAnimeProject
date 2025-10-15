@@ -80,8 +80,15 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cataloganime',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',  # o la IP/host de tu servidor MySQL
+        'PORT': '3307',       # por defecto es 3306
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+        },
     }
 }
 
