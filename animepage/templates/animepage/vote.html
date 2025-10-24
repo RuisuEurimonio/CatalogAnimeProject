@@ -1,0 +1,113 @@
+{% extends "animepage/base.html" %} 
+
+{% block title %} Registra tu experiencia {%endblock %} 
+
+{% block content %}
+
+<main class="vote-page__container">
+  <section class="vote-card" aria-labelledby="vote-title">
+    <header class="vote-card__header">
+      <h1 id="vote-title" class="vote-card__title">Registro de voto</h1>
+      <p class="vote-card__subtitle">
+        Ingresa tu nombre, califica del 1 al 5 y deja observaciones.
+      </p>
+    </header>
+
+    <form class="vote-form" action="{% url 'anime:vote'%}" method="post" novalidate>
+      {% csrf_token %}
+      <div class="vote-form__field">
+        <label for="vote-name" class="vote-form__label">Nombre</label>
+        <input
+          id="vote-name"
+          name="name"
+          type="text"
+          required
+          maxlength="80"
+          placeholder="Tu nombre"
+          class="vote-form__input"
+        />
+      </div>
+
+      <fieldset
+        class="vote-form__field vote-form__votes"
+        aria-labelledby="vote-label"
+      >
+        <legend id="vote-label" class="vote-form__label">Voto</legend>
+        <div class="vote-form__choices">
+          <label class="vote-form__choice">
+            <input
+              type="radio"
+              name="score"
+              value="1"
+              class="vote-form__radio"
+              required
+            />
+            <span class="vote-form__pill">1</span>
+          </label>
+          <label class="vote-form__choice">
+            <input
+              type="radio"
+              name="score"
+              value="2"
+              class="vote-form__radio"
+            />
+            <span class="vote-form__pill">2</span>
+          </label>
+          <label class="vote-form__choice">
+            <input
+              type="radio"
+              name="score"
+              value="3"
+              class="vote-form__radio"
+            />
+            <span class="vote-form__pill">3</span>
+          </label>
+          <label class="vote-form__choice">
+            <input
+              type="radio"
+              name="score"
+              value="4"
+              class="vote-form__radio"
+            />
+            <span class="vote-form__pill">4</span>
+          </label>
+          <label class="vote-form__choice">
+            <input
+              type="radio"
+              name="score"
+              value="5"
+              class="vote-form__radio"
+            />
+            <span class="vote-form__pill">5</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="vote-form__field">
+        <label for="vote-notes" class="vote-form__label">Observaciones</label>
+        <textarea
+          id="vote-notes"
+          name="observation"
+          rows="5"
+          required
+          placeholder="Escribe aquí tus observaciones"
+          class="vote-form__textarea"
+        ></textarea>
+      </div>
+
+      <div class="vote-form__actions">
+        <button type="submit" class="vote-btn vote-btn--primary">
+          Enviar voto
+        </button>
+      </div>
+    </form>
+
+    <div class="vote-card__footer">
+      <p class="vote-card__note">
+        Tu voto se registra de forma anónima. Gracias por participar.
+      </p>
+    </div>
+  </section>
+</main>
+
+{% endblock %}

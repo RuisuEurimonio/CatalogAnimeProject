@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Anime App{% endblock %}</title>
 
-    <link rel="icon" href="{% static 'animepage/anime.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'animepage/images/anime.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'animepage/css/index.css' %}">
     <link rel="stylesheet" href="{% static 'animepage/css/navbar.css' %}">
     <link rel="stylesheet" href="{% static 'animepage/css/info.css' %}">
@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="{% static 'animepage/css/createAnime.css' %}">
     <link rel="stylesheet" href="{% static 'animepage/css/createCharacter.css' %}">
     <link rel="stylesheet" href="{% static 'animepage/css/delete.css' %}">
+    <link rel="stylesheet" href="{% static 'animepage/css/vote.css' %}">
+    <link rel="stylesheet" href="{% static 'animepage/css/votes.css' %}">
+    <link rel="stylesheet" href="{% static 'animepage/css/footer.css' %}">
 </head>
 <body>
 
@@ -25,6 +28,14 @@
     <main>
         {% block content %}{% endblock %}
     </main>
+
+    <footer>
+        <h3> Diseñado por: Ruisu Eurimonio (Luis Linares). </h3>
+        <div class="footer-links">
+            <a href="{% url 'anime:vote' %}"> <button class="btn"> Vota con tu experiencia en esta página. </button> </a>
+            <a href="{% url 'anime:votes' %}"> <button class="btn"> Ver votos. </button> </a>
+        </div>
+    </footer>
 
 </body>
 </html>

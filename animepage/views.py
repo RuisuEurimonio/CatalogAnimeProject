@@ -1,7 +1,7 @@
 from django.shortcuts import  get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.template import loader
-from .models import Anime, Character
+from .models import Anime, Character, Vote
 
 def index(request):
     anime_list = Anime.objects.all()
@@ -78,13 +78,39 @@ def deleteAnime(request, anime_id):
     anime = get_object_or_404(Anime, id=anime_id)
     if request.method == 'POST':
         anime.delete()
-        return redirect('anime:index')  # redirige a la lista de animes
+        return redirect('anime:index')  
     return render(request, 'animepage/deleteAnime.html', {'anime': anime})
 
 def deleteCharacter(request, anime_id, character_id):
     character = get_object_or_404(Character, id=character_id)
-    anime_id = character.anime.id  # para redirigir después
+    anime_id = character.anime.id  
     if request.method == 'POST':
         character.delete()
         return redirect('anime:info', anime_id=anime_id)
     return render(request, 'animepage/deleteCharacter.html', {'character': character})
+
+def vote(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        score = request.POST.get('score')
+        observation = request.POST.get('observation')
+
+        Vote.objects.create(
+                name=name,
+                score=int(score),
+                observation=observation
+            )
+
+        return redirect('anime:votes')
+    
+    return render(request, 'animepage/vote.html')
+
+def votes(request):
+    votes = Vote.objects.all()
+    return render(request, 'animepage/votes.html', {'votes': votes})
+
+def deleteVote(request, id):
+    if request.method == "POST":
+        vote = get_object_or_404(Vote, id=id)
+        vote.delete()
+    return redirect('anime:votes')

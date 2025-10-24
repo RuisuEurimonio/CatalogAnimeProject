@@ -1,0 +1,105 @@
+/* === Página de lista de votos === */
+.votes-page {
+  min-height: 100vh;
+  background-color: #0e1116;
+  color: #f548ec;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.votes-card {
+  background-color: #1b1f26;
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 700px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.votes-title {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #f548ec;
+}
+
+.votes-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.votes-item {
+  background: #242b35;
+  border-radius: 0.8rem;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1rem;
+  transition: background 0.2s;
+}
+
+.votes-item:hover {
+  background: #2c3643;
+}
+
+.votes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.votes-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.votes-score {
+  font-weight: 500;
+  color: #ffd86b;
+}
+
+.votes-notes {
+  font-size: 0.95rem;
+  color: #d1d1d1;
+}
+
+.votes-empty {
+  text-align: center;
+  color: #999;
+  margin-top: 2rem;
+}
+
+.votes-delete-form {
+  margin-top: 0.8rem;
+  text-align: right;
+}
+
+.vote-btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 0.6rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.vote-btn--primary {
+  background-color: #007acc;
+  color: #fff;
+}
+
+.vote-btn--primary:hover {
+  background-color: #0090ff;
+}
+
+.vote-btn--danger {
+  background-color: #c0392b;
+  color: #fff;
+}
+
+.vote-btn--danger:hover {
+  background-color: #e74c3c;
+}

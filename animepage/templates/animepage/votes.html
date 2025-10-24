@@ -1,0 +1,35 @@
+{% extends "animepage/base.html" %} 
+
+{% block title %} Votos recibidos. {%endblock %} 
+
+{% block content %}
+
+<main class="votes-page">
+  <section class="votes-card">
+    <h1 class="votes-title">Votos registrados</h1>
+
+    {% if votes %}
+      <ul class="votes-list">
+        {% for vote in votes %}
+          <li class="votes-item">
+            <div class="votes-header">
+              <h2 class="votes-name">{{ vote.name }}</h2>
+              <span class="votes-score">⭐ {{ vote.score }}/5</span>
+            </div>
+            <p class="votes-notes">{{ vote.observation }}</p>
+
+            <form action="{% url 'anime:deleteVote' vote.id %}" method="post" class="votes-delete-form">
+              {% csrf_token %}
+              <button type="submit" class="vote-btn vote-btn--danger">Eliminar</button>
+            </form>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="votes-empty">Aún no hay votos registrados.</p>
+    {% endif %}
+
+  </section>
+</main>
+
+{% endblock %}
