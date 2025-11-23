@@ -34,9 +34,15 @@ def editCharacter(request, anime_id ,character_id):
 
 class CreateAnime(CreateView):
     model = Anime
-    fields = ['name', 'date', 'main_genre', 'description', 'img_url', 'status', 'type']
+    fields = ['name', 'date', 'main_genre', 'description', 'img_url', 'statusRef', 'type']
     template_name = "animepage/createAnime.html"
     success_url = reverse_lazy('anime:index')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["genres"] = Genre.objects.all()
+        context["status"] = Status.objects.all()
+        return context
 
 def createCharacter(request, anime_id):
 

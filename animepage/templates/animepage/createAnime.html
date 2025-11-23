@@ -19,10 +19,9 @@
 
         <label for="main_genre">Género Principal:</label>
         <select id="main_genre" name="main_genre" required>
-          <option value="ACC">Acción</option>
-          <option value="COM">Comedia</option>
-          <option value="DRM">Drama</option>
-          <option value="FAN">Fantasía</option>
+          {%for genre in genres%}
+            <option value="{{genre.prefix}}">{{genre.name}}</option>
+          {%endfor%}
         </select>
 
         <label for="type">Tipo:</label>
@@ -34,9 +33,9 @@
 
         <label for="status">Estado:</label>
         <select id="status" name="status" required>
-          <option value="EM">En emisión</option>
-          <option value="PROX">Próximamente</option>
-          <option value="FIN">Finalizado</option>
+          {%for state in status%}
+            <option value="{{state.name}}">{{state.name}}</option>
+          {%endfor%}
         </select>
 
         <label for="img_url">URL de Imagen:</label>
