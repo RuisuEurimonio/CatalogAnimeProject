@@ -1,0 +1,75 @@
+{% extends "animepage/base.html" %}
+
+{% block title %} Configuración. {% endblock %}
+
+{% block content %}
+
+<section>
+
+    <h2> Estados configurados </h2>
+
+    <div style="margin: 1rem 0;">
+        <a href="{% url 'anime:createStatus' %}" class="btn btn-primary">Crear nuevo estado</a>
+    </div>
+
+    {% if status %}
+
+        <div style="overflow-x:auto;">
+    <table class="table table-striped" role="table" aria-label="Tabla de estados">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Color</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for state in status %}
+          <tr>
+            <td>{{ state.id }}</td>
+            <td>{{ state.name }}</td>
+            <td>
+              <div style="display:flex; align-items:center; gap:0.75rem;">
+                <!-- Color swatch -->
+                <div
+                  style="width:28px; height:20px; border-radius:4px; border:1px solid #ccc; background-color: {{ state.color|default:'#ffffff' }};"
+                  aria-label="Color {{ state.name }}"
+                  title="{{ state.color }}">
+                </div>
+                <!-- Hex text -->
+                <span>{{ state.color }}</span>
+              </div>
+            </td>
+            <td>
+              {% comment %} <a href="{% url 'config_state_edit' state.id %}" class="btn btn-sm btn-outline-secondary" aria-label="Editar {{ state.name }}">
+                Editar
+              </a>
+
+              <form action="{% url 'config_state_delete' state.id %}" method="post" style="display:inline-block; margin-left:0.5rem;">
+                {% csrf_token %}
+                <button type="submit"
+                        class="btn btn-sm btn-outline-danger"
+                        onclick="return confirm('¿Eliminar el estado {{ state.name }}? Esta acción no se puede deshacer.')"
+                        aria-label="Eliminar {{ state.name }}">
+                  Eliminar
+                </button>
+              </form> {% endcomment %}
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="4">No hay estados creados.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+    {% else %}
+    <p>  No hay estados configurados </p>
+    {% endif%}
+
+</section>
+
+{% endblock %}

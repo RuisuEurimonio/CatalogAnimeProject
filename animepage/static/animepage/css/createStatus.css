@@ -1,0 +1,19 @@
+.createStatus_section{
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+}
+
+.createStatus_form{
+    width: 60%;
+    margin: auto;
+    border: #f548ec solid 2px;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.createStatus_btn{
+    width: 50%;
+    margin: auto;
+}

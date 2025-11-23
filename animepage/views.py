@@ -1,16 +1,20 @@
 from django.shortcuts import  get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.template import loader
-from .models import Anime, Character, Vote
+from .models import Anime, Character, Vote, Status
+from django.urls import reverse_lazy
+from django.views.generic import DetailView, CreateView
+from .forms import StatusForm
 
 def index(request):
     anime_list = Anime.objects.all()
     context = {"anime_list": anime_list}
     return render(request, "animepage/index.html", context)
 
-def info(request, anime_id):
-    info = get_object_or_404(Anime, pk=anime_id)
-    return render(request, "animepage/info.html", {"info": info})
+class Info(DetailView):
+    model = Anime
+    template_name = "animepage/info.html"
+    context_object_name = "info"
 
 def character(request, anime_id, character_id):
     character = get_object_or_404(Character, pk=character_id)
@@ -28,30 +32,11 @@ def editCharacter(request, anime_id ,character_id):
 
     return render(request,  "animepage/editCharacter.html", {"character": character})
 
-def create(request):
-
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        date = request.POST.get('date')
-        main_genre = request.POST.get('main_genre')
-        description = request.POST.get('description')
-        img_url = request.POST.get('img_url') or "no_image"
-        status = request.POST.get('status')
-        type_ = request.POST.get('type')
-
-        Anime.objects.create(
-            name=name,
-            date=date,
-            main_genre=main_genre,
-            description=description,
-            img_url=img_url,
-            status=status,
-            type=type_
-        )
-
-        return redirect('anime:index')
-
-    return render(request, "animepage/createAnime.html")
+class CreateAnime(CreateView):
+    model = Anime
+    fields = ['name', 'date', 'main_genre', 'description', 'img_url', 'status', 'type']
+    template_name = "animepage/createAnime.html"
+    success_url = reverse_lazy('anime:index')
 
 def createCharacter(request, anime_id):
 
@@ -110,7 +95,19 @@ def votes(request):
     return render(request, 'animepage/votes.html', {'votes': votes})
 
 def deleteVote(request, id):
-    if request.method == "POST":
+    if request.method == "POST":    
         vote = get_object_or_404(Vote, id=id)
         vote.delete()
     return redirect('anime:votes')
+
+def config(request):
+
+    status_all = Status.objects.all()
+
+    return render(request, 'animepage/config.html', {"status": status_all})
+
+class CreateStatus(CreateView):
+    model = Status
+    form_class = StatusForm
+    template_name = "animepage/createStatus.html"
+    success_url = reverse_lazy('anime:config')

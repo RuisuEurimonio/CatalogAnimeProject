@@ -1,0 +1,21 @@
+{% extends "animepage/base.html" %}
+
+{% block title %} Crear estado {% endblock %}
+
+{% block content %}
+
+    <section class="createStatus_section">
+
+        <form class="createStatus_form" method="post">
+
+            <h2> Crear nuevo estado. </h2>
+            
+            {% csrf_token%}
+            {{form.as_p}}
+
+            <button type="submit" class="btn createStatus_btn"> Crear </button> 
+        </form>
+
+    </section>
+
+{% endblock %}

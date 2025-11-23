@@ -1,0 +1,41 @@
+.table{
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    background: #d7a7ff;
+}
+
+/* Encabezado */
+.table thead th {
+    background: #303030;
+    padding: 12px 10px;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+}
+
+/* Cuerpo */
+.table tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #acacac;
+}
+
+/* Filas alternas */
+.table tbody tr:nth-child(even) {
+    background: #f8c5fa;
+}
+
+/* Hover */
+.table tbody tr:hover {
+    background: #8a8a8a;
+}
+
+/* Botones dentro de la tabla */
+.table .btn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+}
