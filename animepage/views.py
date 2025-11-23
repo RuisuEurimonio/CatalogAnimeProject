@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import Anime, Character, Vote, Status
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, CreateView
+from django.views.generic import DetailView, CreateView, DeleteView, UpdateView
 from .forms import StatusForm
 
 def index(request):
@@ -109,5 +109,27 @@ def config(request):
 class CreateStatus(CreateView):
     model = Status
     form_class = StatusForm
-    template_name = "animepage/createStatus.html"
+    template_name = "animepage/formStatus.html"
     success_url = reverse_lazy('anime:config')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["accion"] = "Crear"
+        return context
+
+class DeleteStatus(DeleteView):
+    model = Status
+    template_name = "animepage/deleteStatus.html"
+    context_object_name = "status"
+    success_url = reverse_lazy('anime:config')
+
+class EditStatus(UpdateView):
+    model = Status
+    form_class = StatusForm
+    template_name = "animepage/formStatus.html"
+    success_url = reverse_lazy('anime:config')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["accion"] = "Editar"
+        return context

@@ -21,7 +21,7 @@
           <th scope="col">ID</th>
           <th scope="col">Nombre</th>
           <th scope="col">Color</th>
-          <th scope="col">Acciones</th>
+          <th class="col" scope="col">Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -31,35 +31,23 @@
             <td>{{ state.name }}</td>
             <td>
               <div style="display:flex; align-items:center; gap:0.75rem;">
-                <!-- Color swatch -->
                 <div
                   style="width:28px; height:20px; border-radius:4px; border:1px solid #ccc; background-color: {{ state.color|default:'#ffffff' }};"
                   aria-label="Color {{ state.name }}"
                   title="{{ state.color }}">
                 </div>
-                <!-- Hex text -->
                 <span>{{ state.color }}</span>
               </div>
             </td>
             <td>
-              {% comment %} <a href="{% url 'config_state_edit' state.id %}" class="btn btn-sm btn-outline-secondary" aria-label="Editar {{ state.name }}">
+              <a href="{% url 'anime:editStatus' state.id %}" class="btn" aria-label="Editar {{ state.name }}">
                 Editar
               </a>
 
-              <form action="{% url 'config_state_delete' state.id %}" method="post" style="display:inline-block; margin-left:0.5rem;">
-                {% csrf_token %}
-                <button type="submit"
-                        class="btn btn-sm btn-outline-danger"
-                        onclick="return confirm('¿Eliminar el estado {{ state.name }}? Esta acción no se puede deshacer.')"
-                        aria-label="Eliminar {{ state.name }}">
-                  Eliminar
-                </button>
-              </form> {% endcomment %}
+              <a href="{% url 'anime:deleteStatus' state.id %}" class="btn" aria-label="Eliminar {{ state.name }}">
+                Eliminar
+              </a>
             </td>
-          </tr>
-        {% empty %}
-          <tr>
-            <td colspan="4">No hay estados creados.</td>
           </tr>
         {% endfor %}
       </tbody>

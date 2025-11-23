@@ -1,7 +1,7 @@
 from django.urls import path
 
 from . import views
-from .views import Info, CreateAnime, CreateStatus
+from .views import Info, CreateAnime, CreateStatus, EditStatus, DeleteStatus
 
 app_name= "anime"
 urlpatterns = [
@@ -17,5 +17,7 @@ urlpatterns = [
     path("<int:anime_id>/character/<int:character_id>/delete", views.deleteCharacter, name="deleteCharacter"),
     path("<int:anime_id>/character/<int:character_id>/edit", views.editCharacter, name="infoCharacters"),
     path("/config", views.config, name="config"),
-    path("/config/status/create_status", CreateStatus.as_view(), name="createStatus" )
+    path("/config/status/create", CreateStatus.as_view(), name="createStatus" ),
+    path("/config/status/edit/<int:pk>", EditStatus.as_view(), name="editStatus" ),
+    path("/config/status/delete/<int:pk>", DeleteStatus.as_view(), name="deleteStatus" )
 ]
