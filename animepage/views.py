@@ -1,10 +1,10 @@
 from django.shortcuts import  get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.template import loader
-from .models import Anime, Character, Vote, Status
+from .models import Anime, Character, Vote, Status, Genre
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, CreateView, DeleteView, UpdateView
-from .forms import StatusForm
+from .forms import StatusForm, GenreForm
 
 def index(request):
     anime_list = Anime.objects.all()
@@ -103,8 +103,9 @@ def deleteVote(request, id):
 def config(request):
 
     status_all = Status.objects.all()
+    genre_all = Genre.objects.all()
 
-    return render(request, 'animepage/config.html', {"status": status_all})
+    return render(request, 'animepage/config.html', {"status": status_all, "genres": genre_all})
 
 class CreateStatus(CreateView):
     model = Status
@@ -133,3 +134,31 @@ class EditStatus(UpdateView):
         context = super().get_context_data(**kwargs)
         context["accion"] = "Editar"
         return context
+    
+class CreateGenre(CreateView):
+    model = Genre
+    template_name = "animepage/formGenre.html"
+    success_url = reverse_lazy("anime:config")
+    form_class = GenreForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["accion"] = "Crear"
+        return context 
+    
+class EditGenre(UpdateView):
+    model = Genre
+    template_name = "animepage/formGenre.html"
+    success_url = reverse_lazy("anime:config")
+    form_class = GenreForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["accion"] = "Actualizar"
+        return context 
+    
+class DeleteGenre(DeleteView):
+    model = Genre
+    template_name = "animepage/deleteGenre.html"
+    success_url = reverse_lazy("anime:config")
+    context_object_name = "genre"

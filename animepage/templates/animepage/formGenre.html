@@ -1,0 +1,22 @@
+{% extends "animepage/base.html" %}
+
+{% block title %} {{accion}} genero {% endblock %}
+
+{% block content %}
+
+    <section class="createGenre_section">
+
+        <form class="createGenre_form" method="post">
+
+            <h2> {{accion}} nuevo genero. </h2>
+            
+            {% csrf_token%}
+            {{form.as_p}}
+
+            <button type="submit" class="btn createGenre_btn"> {{accion}} </button> 
+            <a href="{% url 'anime:config' %}"> Cancelar </a>
+        </form>
+
+    </section>
+
+{% endblock %}

@@ -3,6 +3,8 @@
     border-collapse: collapse;
     font-family: Arial, sans-serif;
     background: #d7a7ff;
+    text-align: center;
+    vertical-align: middle;
 }
 
 /* Encabezado */

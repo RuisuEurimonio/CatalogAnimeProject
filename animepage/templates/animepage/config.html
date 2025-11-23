@@ -17,7 +17,7 @@
         <div style="overflow-x:auto;">
     <table class="table table-striped" role="table" aria-label="Tabla de estados">
       <thead>
-        <tr>
+        <tr class="table-titles">
           <th scope="col">ID</th>
           <th scope="col">Nombre</th>
           <th scope="col">Color</th>
@@ -56,6 +56,47 @@
 
     {% else %}
     <p>  No hay estados configurados </p>
+    {% endif%}
+
+    <div style="margin: 1rem 0;">
+        <a href="{% url 'anime:createGenre' %}" class="btn btn-primary">Crear nuevo genero</a>
+    </div>
+
+    {% if genres %}
+
+        <div style="overflow-x:auto;">
+    <table class="table table-striped" role="table" aria-label="Tabla de generos">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Descripción</th>
+          <th class="col" scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for genre in genres %}
+          <tr>
+            <td>{{ genre.id }}</td>
+            <td> {{genre.prefix}} - {{ genre.name }}</td>
+            <td>{{ genre.description }}</td>
+            <td>
+              <a href="{% url 'anime:editGenre' genre.id %}" class="btn" aria-label="Editar {{ genre.name }}">
+                Editar
+              </a>
+
+              <a href="{% url 'anime:deleteGenre' genre.id %}" class="btn" aria-label="Eliminar {{ genre.name }}">
+                Eliminar
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+    {% else %}
+    <p>  No hay generos configurados </p>
     {% endif%}
 
 </section>
