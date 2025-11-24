@@ -47,11 +47,3 @@ class Character(models.Model):
     def __str__(self):
         return f"{self.name}"
     
-class Vote(models.Model):
-    name = models.CharField(max_length=50)
-    score = models.IntegerField()
-    observation = models.CharField(max_length=1000)
-    def __str__(self):
-        return f"{self.name}"
-    
-

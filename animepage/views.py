@@ -1,10 +1,14 @@
 from django.shortcuts import  get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.template import loader
-from .models import Anime, Character, Vote, Status, Genre
+from .models import Anime, Character, Status, Genre
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, CreateView, DeleteView, UpdateView
 from .forms import StatusForm, GenreForm, AnimeForm
+from django.conf import settings
+from .mongo_models import Vote
+from bson import ObjectId
+from django.http import Http404
 
 def index(request):
     anime_list = Anime.objects.all()
@@ -92,30 +96,39 @@ def deleteCharacter(request, anime_id, character_id):
 
 def vote(request):
     if request.method == "POST":
-        name = request.POST.get('name')
-        score = request.POST.get('score')
-        observation = request.POST.get('observation')
+        name = request.POST.get("name")
+        score = int(request.POST.get("score"))
+        observation = request.POST.get("observation")
 
-        Vote.objects.create(
-                name=name,
-                score=int(score),
-                observation=observation
-            )
+        vote = Vote(name, score, observation)
+        settings.MONGO_VOTES.insert_one(vote.to_dict())
 
-        return redirect('anime:votes')
-    
-    return render(request, 'animepage/vote.html')
+        return redirect("anime:index")
+
+    return render(request, "animepage/vote.html")
 
 def votes(request):
-    votes = Vote.objects.all()
+    votes = list(settings.MONGO_VOTES.find({}))
+
+    for v in votes:
+        v["id"] = str(v["_id"])
+
     return render(request, 'animepage/votes.html', {'votes': votes})
 
 def deleteVote(request, id):
-    if request.method == "POST":    
-        vote = get_object_or_404(Vote, id=id)
-        vote.delete()
-    return redirect('anime:votes')
+    if request.method == "POST":
 
+        try:
+            obj_id = ObjectId(id)
+        except:
+            raise Http404("ID inválido")
+
+        result = settings.MONGO_VOTES.delete_one({"_id": obj_id})
+
+        if result.deleted_count == 0:
+            raise Http404("Voto no encontrado")
+
+    return redirect('anime:votes')
 def config(request):
 
     status_all = Status.objects.all()

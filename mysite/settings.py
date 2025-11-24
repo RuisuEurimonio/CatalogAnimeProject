@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from pymongo import MongoClient
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,6 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-cr83bv!ccbb=s=j!h*d6qz7-nt75)x8$q=g3d2##by5&xa*v(p'
+MONGO_URI = "mongodb+srv://pipelinares2912_db_user:cznkSATHd7X6wX60@wikianime.momaf7z.mongodb.net/?appName=wikianime"
+
+MONGO_CLIENT = MongoClient(MONGO_URI)
+MONGO_DB = MONGO_CLIENT["wikianime"]
+MONGO_VOTES = MONGO_DB["votes"]
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
