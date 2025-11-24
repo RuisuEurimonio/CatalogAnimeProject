@@ -70,3 +70,13 @@
 .btn-delete:hover{
     color: #fff
 }
+
+.delete_container{
+  width: 60%;
+  margin: auto;
+}
+
+.delete_disclaimer{
+  color: white;
+  font-size: 1rem;
+}
