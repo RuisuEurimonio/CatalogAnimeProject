@@ -1,5 +1,5 @@
 from django import forms
-from .models import Status, Genre
+from .models import Status, Genre, Anime
 
 class StatusForm(forms.ModelForm):
     class Meta:
@@ -21,4 +21,21 @@ class GenreForm(forms.ModelForm):
             "name" : "nombre",
             "prefix" : "Prefijo",
             "description" : "descripcion"
+        }
+
+class CreateAnime(forms.ModelForm):
+    class Meta:
+        model = Anime
+        fields = ["name","date", "main_genre", "description", "img_url", "type", "statusRef"]
+        labels= {
+            "name": "Nombre",
+            "date": "Fecha",
+            "main_genre": "Genero principal",
+            "description": "Descripción",
+            "img_url": "Imagen url",
+            "type": "Tipo",
+            "statusRef": "Estado"
+        }
+        widgets = {
+            "date": forms.DateInput(attrs={"type": "date"})
         }

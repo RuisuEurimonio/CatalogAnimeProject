@@ -4,7 +4,7 @@ from django.template import loader
 from .models import Anime, Character, Vote, Status, Genre
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, CreateView, DeleteView, UpdateView
-from .forms import StatusForm, GenreForm
+from .forms import StatusForm, GenreForm, CreateAnime
 
 def index(request):
     anime_list = Anime.objects.all()
@@ -34,9 +34,10 @@ def editCharacter(request, anime_id ,character_id):
 
 class CreateAnime(CreateView):
     model = Anime
-    fields = ['name', 'date', 'main_genre', 'description', 'img_url', 'statusRef', 'type']
+    form_class = CreateAnime
     template_name = "animepage/createAnime.html"
     success_url = reverse_lazy('anime:index')
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

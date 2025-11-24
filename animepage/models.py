@@ -10,9 +10,15 @@ class Genre(models.Model):
     prefix = models.CharField(max_length= 5, unique= True)
     description = models.CharField(max_length=200, unique = True)
 
+    def __str__(self):
+        return self.name
+
 class Status(models.Model):
     name = models.CharField(max_length=15, unique=True)
     color = models.CharField(max_length=7, unique=True)
+
+    def __str__(self):
+        return self.name
 
 class Anime(models.Model):
     name = models.CharField(max_length=300)

@@ -11,43 +11,11 @@
       <form method="post" class="create-form">
         {% csrf_token %}
 
-        <label for="name">Nombre del Anime:</label>
-        <input type="text" id="name" name="name" required>
+        {{form.as_p}}
 
-        <label for="date">Fecha de Estreno:</label>
-        <input type="date" id="date" name="date" required>
+        <button type="submit" class="btn"> Crear </button>
+        <a href="{% url 'anime:config' %}"> Cancelar </a>
 
-        <label for="main_genre">Género Principal:</label>
-        <select id="main_genre" name="main_genre" required>
-          {%for genre in genres%}
-            <option value="{{genre.prefix}}">{{genre.name}}</option>
-          {%endfor%}
-        </select>
-
-        <label for="type">Tipo:</label>
-        <select id="type" name="type" required>
-          <option value="AN">Anime</option>
-          <option value="PE">Película</option>
-          <option value="OV">Ova</option>
-        </select>
-
-        <label for="status">Estado:</label>
-        <select id="status" name="status" required>
-          {%for state in status%}
-            <option value="{{state.name}}">{{state.name}}</option>
-          {%endfor%}
-        </select>
-
-        <label for="img_url">URL de Imagen:</label>
-        <input type="url" id="img_url" name="img_url" placeholder="https://ejemplo.com/imagen.jpg" oninput="previewImage(this.value)">
-
-        <label for="description">Descripción:</label>
-        <textarea id="description" name="description" rows="5" placeholder="Describe brevemente el anime..." required></textarea>
-
-        <div class="form-buttons">
-          <input type="submit" value="Guardar Anime" class="btn save">
-          <a href="{% url 'anime:index' %}" class="btn back">Cancelar</a>
-        </div>
       </form>
     </div>
   </div>
