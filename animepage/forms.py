@@ -23,7 +23,7 @@ class GenreForm(forms.ModelForm):
             "description" : "descripcion"
         }
 
-class CreateAnime(forms.ModelForm):
+class AnimeForm(forms.ModelForm):
     class Meta:
         model = Anime
         fields = ["name","date", "main_genre", "description", "img_url", "type", "statusRef"]

@@ -1,19 +1,19 @@
 {% extends "animepage/base.html" %}
 
-{% block title %} Crear anime {% endblock %}
+{% block title %} {{accion}} anime {% endblock %}
 
 {% block content %}
 
  <div class="create-container">
     <div class="create-card">
-      <h1>Agregar nuevo Anime</h1>
+      <h1>{{accion}} Anime</h1>
 
       <form method="post" class="create-form">
         {% csrf_token %}
 
         {{form.as_p}}
 
-        <button type="submit" class="btn"> Crear </button>
+        <button type="submit" class="btn"> {{accion}} </button>
         <a href="{% url 'anime:config' %}"> Cancelar </a>
 
       </form>

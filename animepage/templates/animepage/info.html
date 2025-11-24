@@ -6,6 +6,7 @@
 
 <div class="anime-detail">
   <div class="anime-header">
+    <a href="{% url 'anime:update' info.id %}" class="editAnime"> Editar </a>
     <img src="{{ info.img_url }}" alt="{{ info.name }}">
     <div class="anime-info">
       <h1>{{ info.name }}</h1>

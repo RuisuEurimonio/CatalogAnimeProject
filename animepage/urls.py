@@ -1,13 +1,14 @@
 from django.urls import path
 
 from . import views
-from .views import Info, CreateAnime, CreateStatus, EditStatus, DeleteStatus, CreateGenre, EditGenre, DeleteGenre
+from .views import Info, CreateAnime, CreateStatus, EditStatus, DeleteStatus, CreateGenre, EditGenre, DeleteGenre, UpdateAnime
 
 app_name= "anime"
 urlpatterns = [
     path("", views.index, name="index"),
     path("<int:pk>/", Info.as_view(), name="info"),
     path("create", CreateAnime.as_view(), name="create"),
+    path("update/<int:pk>", UpdateAnime.as_view(), name="update"),
     path("vote", views.vote, name="vote"),
     path("vote/<int:id>/delete", views.deleteVote, name="deleteVote"),
     path("votes", views.votes, name="votes"),

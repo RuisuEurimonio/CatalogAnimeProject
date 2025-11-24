@@ -4,7 +4,7 @@ from django.template import loader
 from .models import Anime, Character, Vote, Status, Genre
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, CreateView, DeleteView, UpdateView
-from .forms import StatusForm, GenreForm, CreateAnime
+from .forms import StatusForm, GenreForm, AnimeForm
 
 def index(request):
     anime_list = Anime.objects.all()
@@ -34,16 +34,25 @@ def editCharacter(request, anime_id ,character_id):
 
 class CreateAnime(CreateView):
     model = Anime
-    form_class = CreateAnime
-    template_name = "animepage/createAnime.html"
+    form_class = AnimeForm
+    template_name = "animepage/formAnime.html"
     success_url = reverse_lazy('anime:index')
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["genres"] = Genre.objects.all()
-        context["status"] = Status.objects.all()
-        return context
+        context["accion"] = "Crear"
+        return context 
+    
+class UpdateAnime(UpdateView):
+    model = Anime
+    form_class = AnimeForm
+    template_name = "animepage/formAnime.html"
+    success_url = reverse_lazy("anime:index")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["accion"] = "Actualizar"
+        return context 
 
 def createCharacter(request, anime_id):
 
@@ -62,7 +71,7 @@ def createCharacter(request, anime_id):
             img_url=img_url,
             anime=anime
         )
-        return redirect('anime:info', anime_id=anime.id)
+        return redirect('anime:info', pk=anime.id)
 
     return render(request, "animepage/createCharacter.html", {"anime": anime})
 
@@ -78,7 +87,7 @@ def deleteCharacter(request, anime_id, character_id):
     anime_id = character.anime.id  
     if request.method == 'POST':
         character.delete()
-        return redirect('anime:info', anime_id=anime_id)
+        return redirect('anime:info', pk=anime_id)
     return render(request, 'animepage/deleteCharacter.html', {'character': character})
 
 def vote(request):
