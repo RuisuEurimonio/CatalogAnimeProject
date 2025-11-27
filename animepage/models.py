@@ -36,6 +36,7 @@ class Anime(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+    
 
 class Character(models.Model):
     name = models.CharField(max_length=50)
