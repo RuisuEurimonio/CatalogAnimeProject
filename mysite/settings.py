@@ -23,8 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-cr83bv!ccbb=s=j!h*d6qz7-nt75)x8$q=g3d2##by5&xa*v(p'
-#MONGO_URI = os.getenv("MONGO_URI")
-MONGO_URI = "mongodb+srv://wikiUser:ntIKTZBmOpdxf5uE@wikianime.momaf7z.mongodb.net/?appName=wikianime"
+MONGO_URI = os.getenv("MONGO_URI")
+#MONGO_URI = "mongodb+srv://wikiUser:ntIKTZBmOpdxf5uE@wikianime.momaf7z.mongodb.net/?appName=wikianime"
 
 MONGO_CLIENT = MongoClient(MONGO_URI)
 MONGO_DB = MONGO_CLIENT["wikianime"]
@@ -95,7 +95,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-""" DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.getenv("MYSQL_DB"),
@@ -104,9 +104,9 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
         'HOST': os.getenv("MYSQL_HOST"),
         'PORT': os.getenv("MYSQL_PORT")
     }
-} """
+}
 
-DATABASES = {
+""" DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': "cataloganime",
@@ -115,7 +115,7 @@ DATABASES = {
         'HOST': "localhost",
         'PORT': "3307"
     }
-}
+} """
 
 
 # Password validation
